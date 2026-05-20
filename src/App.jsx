@@ -32,20 +32,53 @@ function App() {
   const total = expenses.reduce((sum, e) => sum + e.amount, 0);
 
   return (
-    <div style={{ maxWidth: 600, margin: '2rem auto', fontFamily: 'sans-serif' }}>
-      <h1>Expenses Tracker</h1>
-      <form onSubmit={addExpense} style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+    <div style={{ maxWidth: 600, margin: '2rem auto', fontFamily: 'sans-serif', padding: '2rem', backgroundColor: '#ffffff', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+      <h1 style={{ color: '#213547', marginBottom: '1.5rem' }}>Expenses Tracker</h1>
+
+      <form onSubmit={addExpense} style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
         <input placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} required />
         <input placeholder="Amount" type="number" step="0.01" value={amount} onChange={e => setAmount(e.target.value)} required />
         <input placeholder="Category" value={category} onChange={e => setCategory(e.target.value)} />
-        <button type="submit">Add</button>
+        <button type="submit" style={{ padding: '10px 16px', fontWeight: 600 }}>Add</button>
       </form>
-      <p><strong>Total: ${total.toFixed(2)}</strong></p>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+
+      <p style={{ fontSize: '1.2rem', color: '#2196F3', fontWeight: 600, padding: '0.75rem', backgroundColor: 'rgba(33, 150, 243, 0.08)', borderRadius: '8px' }}>
+        Total: ${total.toFixed(2)}
+      </p>
+
+      <ul style={{ listStyle: 'none', padding: 0, marginTop: '1rem' }}>
         {expenses.map(exp => (
-          <li key={exp.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', borderBottom: '1px solid #ddd' }}>
-            <span>{exp.description} — ${exp.amount.toFixed(2)} <em>({exp.category})</em></span>
-            <button onClick={() => deleteExpense(exp.id)}>Delete</button>
+          <li key={exp.id} style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '12px 16px',
+            backgroundColor: '#ffffff',
+            borderRadius: '10px',
+            marginBottom: '8px',
+            boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+            border: '1px solid #f0f0f0'
+          }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <span style={{ fontWeight: 500, color: '#213547' }}>{exp.description}</span>
+              <em style={{ color: '#666', fontSize: '0.85em' }}>{exp.category || 'General'}</em>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontWeight: 600, color: '#213547', fontSize: '1.05em' }}>${exp.amount.toFixed(2)}</span>
+              <button
+                onClick={() => deleteExpense(exp.id)}
+                style={{
+                  backgroundColor: 'transparent',
+                  color: '#F44336',
+                  border: 'none',
+                  padding: '6px 10px',
+                  fontSize: '0.85em',
+                  fontWeight: 600
+                }}
+              >
+                ✕
+              </button>
+            </div>
           </li>
         ))}
       </ul>

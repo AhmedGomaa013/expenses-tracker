@@ -38,7 +38,7 @@ function App() {
         <input placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} required />
         <input placeholder="Amount" type="number" step="0.01" value={amount} onChange={e => setAmount(e.target.value)} required />
         <input placeholder="Category" value={category} onChange={e => setCategory(e.target.value)} />
-        <button type="submit">Add</button>
+        <button type="submit" style={{ padding: '10px 16px', fontWeight: 600 }}>Add</button>
       </form>
       <p style={{ fontSize: '1.2rem', color: '#2196F3', fontWeight: 600, padding: '0.75rem', backgroundColor: 'rgba(33, 150, 243, 0.08)', borderRadius: '8px' }}>
         Total: ${total.toFixed(2)}
